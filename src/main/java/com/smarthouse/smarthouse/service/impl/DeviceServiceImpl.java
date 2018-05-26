@@ -68,8 +68,8 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
-    public List<Device> findAllByActiveAndHouseId(Boolean isActive, Long houseId) {
+    public List<Device> findAllByActiveAndHouseId(Boolean active, Long houseId) {
         checkObjectExistsById(houseId, houseRepository);
-        return deviceRepository.findAllByIsActiveAndHouse_Id(isActive, houseId);
+        return deviceRepository.findAllByActiveAndHouse_Id(active, houseId);
     }
 }

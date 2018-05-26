@@ -7,7 +7,7 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 @Dto
-public class HouseFullDto extends HouseShortDto<HouseFullDto>{
+public class HouseFullDto extends HouseShortDto<HouseFullDto> {
 
     private List<DeviceShortDto> devices;
     private List<UserShortDto> users;
@@ -37,6 +37,9 @@ public class HouseFullDto extends HouseShortDto<HouseFullDto>{
                 ", users=" + users.stream().map(UserShortDto::getId).collect(toList()) +
                 ", id=" + id +
                 ", name='" + name + '\'' +
+                ", serial='" + serial + '\'' +
+                ", active=" + active +
+                ", online=" + online +
                 '}';
     }
 }

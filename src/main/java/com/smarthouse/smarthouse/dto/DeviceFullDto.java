@@ -24,7 +24,7 @@ public class DeviceFullDto extends DeviceShortDto<DeviceFullDto> {
                 ", name='" + name + '\'' +
                 ", pin=" + pin +
                 ", deviceType=" + deviceType +
-                ", isActive=" + isActive +
+                ", active=" + active +
                 '}';
     }
 }

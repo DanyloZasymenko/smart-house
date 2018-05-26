@@ -1,7 +1,10 @@
 package com.smarthouse.smarthouse.service.impl;
 
 import com.smarthouse.smarthouse.model.User;
+import com.smarthouse.smarthouse.repository.HouseRepository;
 import com.smarthouse.smarthouse.repository.UserRepository;
+import com.smarthouse.smarthouse.service.ArduinoService;
+import com.smarthouse.smarthouse.service.HouseService;
 import com.smarthouse.smarthouse.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

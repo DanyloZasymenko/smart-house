@@ -19,7 +19,7 @@ public class AndroidServiceImpl implements AndroidService{
     @Override
     public Device changeActive(Long deviceId, Boolean active) {
         Device device = deviceService.findOne(deviceId);
-        arduinoService.changeDevice(device.getPin(), active);
+        arduinoService.changeDevice(device.setActive(active));
         return deviceService.save(device.setActive(active));
     }
 }

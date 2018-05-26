@@ -3,6 +3,7 @@ package com.smarthouse.smarthouse.model;
 import com.smarthouse.smarthouse.model.enums.DeviceType;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 public class Device {
@@ -13,7 +14,7 @@ public class Device {
     private String name;
     private Integer pin;
     private DeviceType deviceType;
-    private Boolean isActive;
+    private Boolean active;
     @ManyToOne(cascade = CascadeType.REFRESH)
     private House house;
 
@@ -63,11 +64,11 @@ public class Device {
     }
 
     public Boolean getActive() {
-        return isActive;
+        return active;
     }
 
     public Device setActive(Boolean active) {
-        isActive = active;
+        this.active = active;
         return this;
     }
 
@@ -78,7 +79,7 @@ public class Device {
                 ", name='" + name + '\'' +
                 ", pin=" + pin +
                 ", deviceType=" + deviceType +
-                ", isActive=" + isActive +
+                ", active=" + active +
                 ", house=" + house.getId() +
                 '}';
     }

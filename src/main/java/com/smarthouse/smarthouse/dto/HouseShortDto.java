@@ -7,6 +7,9 @@ public class HouseShortDto<T extends HouseShortDto> {
 
     protected Long id;
     protected String name;
+    protected String serial;
+    protected Boolean active;
+    protected Boolean online;
 
     public Long getId() {
         return id;
@@ -26,11 +29,41 @@ public class HouseShortDto<T extends HouseShortDto> {
         return (T) this;
     }
 
+    public String getSerial() {
+        return serial;
+    }
+
+    public T setSerial(String serial) {
+        this.serial = serial;
+        return (T) this;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public T setActive(Boolean active) {
+        this.active = active;
+        return (T) this;
+    }
+
+    public Boolean getOnline() {
+        return online;
+    }
+
+    public T setOnline(Boolean online) {
+        this.online = online;
+        return (T) this;
+    }
+
     @Override
     public String toString() {
         return "HouseShortDto{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", serial='" + serial + '\'' +
+                ", active=" + active +
+                ", online=" + online +
                 '}';
     }
 }

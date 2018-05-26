@@ -57,10 +57,10 @@ public class DeviceController {
                 .map(device -> map(device, DeviceShortDto.class)).collect(toList()));
     }
 
-    @GetMapping("/find-all-by-is-active-and-house-id/{active}/{id}")
-    private ResponseEntity<List<DeviceShortDto>> findAllByActiveAndHouseId(@PathVariable Boolean isActive,
+    @GetMapping("/find-all-by-active-and-house-id/{active}/{id}")
+    private ResponseEntity<List<DeviceShortDto>> findAllByActiveAndHouseId(@PathVariable Boolean active,
                                                                            @PathVariable Long id) {
-        return ResponseEntity.ok(deviceService.findAllByActiveAndHouseId(isActive, id).stream()
+        return ResponseEntity.ok(deviceService.findAllByActiveAndHouseId(active, id).stream()
                 .map(device -> map(device, DeviceShortDto.class)).collect(toList()));
     }
 }

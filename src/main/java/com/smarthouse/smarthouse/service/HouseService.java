@@ -15,4 +15,6 @@ public interface HouseService {
     List<House> findAll();
 
     Boolean delete(Long id);
+
+    House findBySerial(String serial);
 }

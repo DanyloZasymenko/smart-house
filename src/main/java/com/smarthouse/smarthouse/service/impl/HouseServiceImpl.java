@@ -19,7 +19,7 @@ public class HouseServiceImpl implements HouseService {
     @Override
     public House save(House house) {
         checkSave(house);
-        return houseRepository.save(house);
+        return houseRepository.save(house.setActive(true));
     }
 
     @Override
@@ -48,5 +48,10 @@ public class HouseServiceImpl implements HouseService {
         } catch (RuntimeException e) {
             return false;
         }
+    }
+
+    @Override
+    public House findBySerial(String serial) {
+        return houseRepository.findBySerial(serial);
     }
 }

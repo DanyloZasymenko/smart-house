@@ -10,7 +10,7 @@ public class DeviceShortDto<T extends DeviceShortDto> {
     protected String name;
     protected Integer pin;
     protected DeviceType deviceType;
-    protected Boolean isActive;
+    protected Boolean active;
 
     public Long getId() {
         return id;
@@ -49,11 +49,11 @@ public class DeviceShortDto<T extends DeviceShortDto> {
     }
 
     public Boolean getActive() {
-        return isActive;
+        return active;
     }
 
     public T setActive(Boolean active) {
-        isActive = active;
+        this.active = active;
         return (T) this;
     }
 
@@ -64,7 +64,7 @@ public class DeviceShortDto<T extends DeviceShortDto> {
                 ", name='" + name + '\'' +
                 ", pin=" + pin +
                 ", deviceType=" + deviceType +
-                ", isActive=" + isActive +
+                ", active=" + active +
                 '}';
     }
 }

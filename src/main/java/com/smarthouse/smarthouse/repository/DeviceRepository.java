@@ -13,5 +13,5 @@ public interface DeviceRepository extends JpaRepository<Device, Long>{
 
     List<Device> findAllByHouse_Id(Long house_id);
 
-    List<Device> findAllByIsActiveAndHouse_Id(Boolean isActive, Long house_id);
+    List<Device> findAllByActiveAndHouse_Id(Boolean active, Long house_id);
 }
