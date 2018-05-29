@@ -14,8 +14,11 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String username;
+    private String email;
     private String password;
+    private String name;
+    private String middleName;
+    private String lastName;
     @ManyToOne(cascade = CascadeType.REFRESH)
     private House house;
 
@@ -28,13 +31,39 @@ public class User implements UserDetails {
         return this;
     }
 
-    @Override
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public User setUsername(String username) {
-        this.username = username;
+    public User setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public User setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public User setMiddleName(String middleName) {
+        this.middleName = middleName;
+        return this;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public User setLastName(String lastName) {
+        this.lastName = lastName;
         return this;
     }
 
@@ -55,6 +84,11 @@ public class User implements UserDetails {
     public User setHouse(House house) {
         this.house = house;
         return this;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
     }
 
     @Override
@@ -86,9 +120,12 @@ public class User implements UserDetails {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", house=" + house.getId() +
+                ", name='" + name + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", house=" + (house == null ? "null" : house.getId()) +
                 '}';
     }
 }

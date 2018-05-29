@@ -1,15 +1,13 @@
 package com.smarthouse.smarthouse.service.impl;
 
 import com.smarthouse.smarthouse.model.User;
-import com.smarthouse.smarthouse.repository.HouseRepository;
 import com.smarthouse.smarthouse.repository.UserRepository;
-import com.smarthouse.smarthouse.service.ArduinoService;
-import com.smarthouse.smarthouse.service.HouseService;
 import com.smarthouse.smarthouse.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,10 +20,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
-    public User save(User user) {
-        checkSave(user);
-        return userRepository.save(user);
+    public User save(String name, String middleName, String lastName, String email, String password) {
+        return userRepository.save(new User()
+                .setName(name)
+                .setMiddleName(middleName)
+                .setLastName(lastName)
+                .setEmail(email)
+                .setPassword(passwordEncoder.encode(password)));
     }
 
     @Override
@@ -57,9 +62,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User findByUsername(String username) {
-        checkString(username);
-        return userRepository.findByUsername(username);
+    public User findByEmail(String email) {
+        checkString(email);
+        return userRepository.findByEmail(email);
     }
 
     @Override
@@ -70,6 +75,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return userRepository.findByUsername(s);
+        return userRepository.findByEmail(s);
     }
 }

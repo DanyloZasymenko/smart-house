@@ -21,8 +21,14 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/save")
-    private ResponseEntity<UserFullDto> save(@RequestBody UserFullDto userFullDto) {
-        return ResponseEntity.ok(map(userService.save(map(userFullDto, User.class)), UserFullDto.class));
+    private ResponseEntity<UserFullDto> save(@RequestParam String name,
+                                             @RequestParam String middleName,
+                                             @RequestParam String lastName,
+                                             @RequestParam String email,
+                                             @RequestParam String password) {
+        User user = userService.save(name, middleName, lastName, email, password);
+        System.err.println(user);
+        return ResponseEntity.ok(map(user, UserFullDto.class));
     }
 
     @PostMapping("/update")
@@ -46,9 +52,9 @@ public class UserController {
         return ResponseEntity.ok(userService.delete(id));
     }
 
-    @GetMapping("/find-by-username/{username}")
-    private ResponseEntity<UserFullDto> findByUsername(@PathVariable String username) {
-        return ResponseEntity.ok(map(userService.findByUsername(username), UserFullDto.class));
+    @GetMapping("/find-by-email/{email}")
+    private ResponseEntity<UserFullDto> findByUsername(@PathVariable String email) {
+        return ResponseEntity.ok(map(userService.findByEmail(email), UserFullDto.class));
     }
 
     @GetMapping("/find-all-by-house-id/{id}")

@@ -6,7 +6,11 @@ import java.util.List;
 
 public interface UserService {
 
-    User save(User user);
+    User save(String name,
+              String middleName,
+              String lastName,
+              String email,
+              String password);
 
     User update(User user);
 
@@ -16,7 +20,7 @@ public interface UserService {
 
     Boolean delete(Long id);
 
-    User findByUsername(String username);
+    User findByEmail(String email);
 
     List<User> findAllByHouseId(Long houseId);
 }
