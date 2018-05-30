@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Time;
 import java.util.List;
 
 @RestController
@@ -16,27 +17,32 @@ public class LightConfigController {
     private LightConfigService lightConfigService;
 
     @PostMapping("/save")
-    private ResponseEntity<LightConfig> save(@RequestBody LightConfig lightConfig){
-        return ResponseEntity.ok(lightConfigService.save(lightConfig));
+    private ResponseEntity<LightConfig> save(@RequestParam Time startTime,
+                                             @RequestParam Time endTime,
+                                             @RequestParam Boolean active) {
+        return ResponseEntity.ok(lightConfigService.save(startTime, endTime, active));
     }
 
     @PostMapping("/update")
-    private ResponseEntity<LightConfig> update(@RequestBody LightConfig lightConfig){
-        return ResponseEntity.ok(lightConfigService.update(lightConfig));
+    private ResponseEntity<LightConfig> update(@RequestParam Long id,
+                                               @RequestParam Time startTime,
+                                               @RequestParam Time endTime,
+                                               @RequestParam Boolean active) {
+        return ResponseEntity.ok(lightConfigService.update(id, startTime, endTime, active));
     }
 
     @GetMapping("/find-one/{id}")
-    private ResponseEntity<LightConfig> findOne(@PathVariable Long id){
+    private ResponseEntity<LightConfig> findOne(@PathVariable Long id) {
         return ResponseEntity.ok(lightConfigService.findOne(id));
     }
 
     @GetMapping("/find-all")
-    private ResponseEntity<List<LightConfig>> findAll(){
+    private ResponseEntity<List<LightConfig>> findAll() {
         return ResponseEntity.ok(lightConfigService.findAll());
     }
 
     @DeleteMapping("/delete/{id}")
-    private ResponseEntity<Boolean> delete(@PathVariable Long id){
+    private ResponseEntity<Boolean> delete(@PathVariable Long id) {
         return ResponseEntity.ok(lightConfigService.delete(id));
     }
 }

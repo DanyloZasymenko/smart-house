@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.smarthouse.smarthouse.service.utils.Validation.*;
+import static com.smarthouse.smarthouse.service.utils.Validation.checkId;
+import static com.smarthouse.smarthouse.service.utils.Validation.checkObjectExistsById;
 
 @Service
 public class HouseServiceImpl implements HouseService {
@@ -17,14 +18,28 @@ public class HouseServiceImpl implements HouseService {
     private HouseRepository houseRepository;
 
     @Override
-    public House save(House house) {
-        checkSave(house);
-        return houseRepository.save(house.setActive(true));
+    public House save(String name,
+                      String serial) {
+        return houseRepository.save(new House()
+                .setName(name)
+                .setSerial(serial)
+                .setActive(true));
     }
 
     @Override
     public House update(House house) {
         checkObjectExistsById(house.getId(), houseRepository);
+        return houseRepository.save(house);
+    }
+
+    @Override
+    public House update(Long id,
+                        String name,
+                        String serial) {
+        checkObjectExistsById(id, houseRepository);
+        House house = findOne(id)
+                .setName(name)
+                .setSerial(serial);
         return houseRepository.save(house);
     }
 

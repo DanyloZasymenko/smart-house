@@ -2,13 +2,21 @@ package com.smarthouse.smarthouse.service;
 
 import com.smarthouse.smarthouse.model.ClimateConfig;
 
+import java.sql.Time;
 import java.util.List;
 
 public interface ClimateConfigService {
 
-    ClimateConfig save(ClimateConfig climateConfig);
+    ClimateConfig save(Double temperature,
+                       Time startTime,
+                       Time endTime,
+                       Boolean active);
 
-    ClimateConfig update(ClimateConfig climateConfig);
+    ClimateConfig update(Long id,
+                         Double temperature,
+                         Time startTime,
+                         Time endTime,
+                         Boolean active);
 
     ClimateConfig findOne(Long id);
 

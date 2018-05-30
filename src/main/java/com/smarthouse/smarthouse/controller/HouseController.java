@@ -2,7 +2,6 @@ package com.smarthouse.smarthouse.controller;
 
 import com.smarthouse.smarthouse.dto.HouseFullDto;
 import com.smarthouse.smarthouse.dto.HouseShortDto;
-import com.smarthouse.smarthouse.model.House;
 import com.smarthouse.smarthouse.service.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,13 +20,16 @@ public class HouseController {
     private HouseService houseService;
 
     @PostMapping("/save")
-    private ResponseEntity<HouseFullDto> save(@RequestBody HouseFullDto houseFullDto) {
-        return ResponseEntity.ok(map(houseService.save(map(houseFullDto, House.class)), HouseFullDto.class));
+    private ResponseEntity<HouseFullDto> save(@RequestParam String name,
+                                              @RequestParam String serial) {
+        return ResponseEntity.ok(map(houseService.save(name, serial), HouseFullDto.class));
     }
 
     @PostMapping("/update")
-    private ResponseEntity<HouseFullDto> update(@RequestBody HouseFullDto houseFullDto) {
-        return ResponseEntity.ok(map(houseService.update(map(houseFullDto, House.class)), HouseFullDto.class));
+    private ResponseEntity<HouseFullDto> update(@RequestParam Long id,
+                                                @RequestParam String name,
+                                                @RequestParam String serial) {
+        return ResponseEntity.ok(map(houseService.update(id, name, serial), HouseFullDto.class));
     }
 
     @GetMapping("/find-one/{id}")
