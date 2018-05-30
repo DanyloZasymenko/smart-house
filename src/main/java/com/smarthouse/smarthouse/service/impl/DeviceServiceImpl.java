@@ -1,9 +1,11 @@
 package com.smarthouse.smarthouse.service.impl;
 
 import com.smarthouse.smarthouse.model.Device;
+import com.smarthouse.smarthouse.model.enums.DeviceType;
 import com.smarthouse.smarthouse.repository.DeviceRepository;
 import com.smarthouse.smarthouse.repository.HouseRepository;
 import com.smarthouse.smarthouse.service.DeviceService;
+import com.smarthouse.smarthouse.service.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,9 @@ public class DeviceServiceImpl implements DeviceService {
     @Autowired
     private HouseRepository houseRepository;
 
+    @Autowired
+    private HouseService houseService;
+
     @Override
     public Device save(Device device) {
         checkSave(device);
@@ -27,8 +32,22 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
-    public Device update(Device device) {
-        checkObjectExistsById(device.getId(), deviceRepository);
+    public Device save(String name, Integer pin, String deviceType, Long houseId) {
+        return deviceRepository.save(new Device()
+                .setName(name)
+                .setPin(pin)
+                .setDeviceType(DeviceType.valueOf(deviceType))
+                .setHouse(houseService.findOne(houseId)));
+    }
+
+    @Override
+    public Device update(Long id, String name, Integer pin, String deviceType, Long houseId) {
+        checkObjectExistsById(id, deviceRepository);
+        Device device = findOne(id)
+                .setName(name)
+                .setPin(pin)
+                .setDeviceType(DeviceType.valueOf(deviceType))
+                .setHouse(houseService.findOne(houseId));
         return deviceRepository.save(device);
     }
 

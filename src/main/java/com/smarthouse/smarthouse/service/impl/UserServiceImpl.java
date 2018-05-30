@@ -34,8 +34,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User update(User user) {
-        checkObjectExistsById(user.getId(), userRepository);
+    public User update(Long id, String name, String middleName, String lastName, String email, String password) {
+        checkObjectExistsById(id, userRepository);
+        User user = findOne(id)
+                .setName(name)
+                .setMiddleName(middleName)
+                .setLastName(lastName)
+                .setEmail(email)
+                .setPassword(passwordEncoder.encode(password));
         return userRepository.save(user);
     }
 

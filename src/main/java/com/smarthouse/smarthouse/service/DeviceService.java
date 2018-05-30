@@ -8,7 +8,16 @@ public interface DeviceService {
 
     Device save(Device device);
 
-    Device update(Device device);
+    Device save(String name,
+                Integer pin,
+                String deviceType,
+                Long houseId);
+
+    Device update(Long id,
+                  String name,
+                  Integer pin,
+                  String deviceType,
+                  Long houseId);
 
     Device findOne(Long id);
 

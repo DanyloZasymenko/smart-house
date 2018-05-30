@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 import static com.smarthouse.smarthouse.dto.utils.builder.Builder.map;
@@ -19,6 +20,12 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @GetMapping
+    private ResponseEntity<UserFullDto> getUser(Principal principal) {
+        System.err.println("-------------------GET-USER--------------------");
+        return ResponseEntity.ok(map(userService.findByEmail(principal.getName()), UserFullDto.class));
+    }
 
     @PostMapping("/save")
     private ResponseEntity<UserFullDto> save(@RequestParam String name,
@@ -32,8 +39,13 @@ public class UserController {
     }
 
     @PostMapping("/update")
-    private ResponseEntity<UserFullDto> update(@RequestBody UserFullDto userFullDto) {
-        return ResponseEntity.ok(map(userService.update(map(userFullDto, User.class)), UserFullDto.class));
+    private ResponseEntity<UserFullDto> update(@RequestParam Long id,
+                                               @RequestParam String name,
+                                               @RequestParam String middleName,
+                                               @RequestParam String lastName,
+                                               @RequestParam String email,
+                                               @RequestParam String password) {
+        return ResponseEntity.ok(map(userService.update(id, name, middleName, lastName, email, password), UserFullDto.class));
     }
 
     @GetMapping("/find-one/{id}")

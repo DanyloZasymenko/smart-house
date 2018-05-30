@@ -2,7 +2,6 @@ package com.smarthouse.smarthouse.controller;
 
 import com.smarthouse.smarthouse.dto.DeviceFullDto;
 import com.smarthouse.smarthouse.dto.DeviceShortDto;
-import com.smarthouse.smarthouse.model.Device;
 import com.smarthouse.smarthouse.service.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,13 +20,20 @@ public class DeviceController {
     private DeviceService deviceService;
 
     @PostMapping("/save")
-    private ResponseEntity<DeviceFullDto> save(@RequestBody DeviceFullDto deviceFullDto) {
-        return ResponseEntity.ok(map(deviceService.save(map(deviceFullDto, Device.class)), DeviceFullDto.class));
+    private ResponseEntity<DeviceFullDto> save(@RequestParam String name,
+                                               @RequestParam Integer pin,
+                                               @RequestParam String deviceType,
+                                               @RequestParam Long houseId) {
+        return ResponseEntity.ok(map(deviceService.save(name, pin, deviceType, houseId), DeviceFullDto.class));
     }
 
     @PostMapping("/update")
-    private ResponseEntity<DeviceFullDto> update(@RequestBody DeviceFullDto deviceFullDto) {
-        return ResponseEntity.ok(map(deviceService.update(map(deviceFullDto, Device.class)), DeviceFullDto.class));
+    private ResponseEntity<DeviceFullDto> update(@RequestParam Long id,
+                                                 @RequestParam String name,
+                                                 @RequestParam Integer pin,
+                                                 @RequestParam String deviceType,
+                                                 @RequestParam Long houseId) {
+        return ResponseEntity.ok(map(deviceService.update(id, name, pin, deviceType, houseId), DeviceFullDto.class));
     }
 
     @GetMapping("/find-one/{id}")

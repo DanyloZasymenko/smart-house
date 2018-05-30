@@ -12,7 +12,12 @@ public interface UserService {
               String email,
               String password);
 
-    User update(User user);
+    User update(Long id,
+                String name,
+                String middleName,
+                String lastName,
+                String email,
+                String password);
 
     User findOne(Long id);
 
