@@ -28,7 +28,7 @@ public class DeviceServiceImpl implements DeviceService {
     @Override
     public Device save(Device device) {
         checkSave(device);
-        return deviceRepository.save(device);
+        return deviceRepository.save(device.setActive(false));
     }
 
     @Override
@@ -37,7 +37,8 @@ public class DeviceServiceImpl implements DeviceService {
                 .setName(name)
                 .setPin(pin)
                 .setDeviceType(DeviceType.valueOf(deviceType))
-                .setHouse(houseService.findOne(houseId)));
+                .setHouse(houseService.findOne(houseId))
+                .setActive(false));
     }
 
     @Override
