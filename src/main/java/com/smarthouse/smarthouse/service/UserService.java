@@ -12,6 +12,8 @@ public interface UserService {
               String email,
               String password);
 
+    User update(User user);
+
     User update(Long id,
                 String name,
                 String middleName,

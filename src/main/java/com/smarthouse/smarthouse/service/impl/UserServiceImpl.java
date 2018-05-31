@@ -34,6 +34,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    public User update(User user) {
+        checkObjectExistsById(user.getId(), userRepository);
+        return userRepository.save(user);
+    }
+
+    @Override
     public User update(Long id, String name, String middleName, String lastName, String email, String password) {
         checkObjectExistsById(id, userRepository);
         User user = findOne(id)

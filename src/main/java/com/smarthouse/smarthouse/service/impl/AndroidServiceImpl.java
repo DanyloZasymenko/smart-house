@@ -22,4 +22,9 @@ public class AndroidServiceImpl implements AndroidService{
         arduinoService.changeDevice(device.setActive(active));
         return deviceService.save(device.setActive(active));
     }
+
+    @Override
+    public void getTemperature() {
+
+    }
 }

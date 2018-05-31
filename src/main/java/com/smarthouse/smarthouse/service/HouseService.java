@@ -2,10 +2,12 @@ package com.smarthouse.smarthouse.service;
 
 import com.smarthouse.smarthouse.model.House;
 
-import java.sql.Timestamp;
+import java.security.Principal;
 import java.util.List;
 
 public interface HouseService {
+
+    House save(House house);
 
     House save(String name,
                String serial);
@@ -23,4 +25,6 @@ public interface HouseService {
     Boolean delete(Long id);
 
     House findBySerial(String serial);
+
+    House createOrFindBySerial(String serial, Principal principal);
 }
