@@ -9,6 +9,7 @@ import com.smarthouse.smarthouse.service.utils.Temperature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import sun.print.resources.serviceui;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -40,6 +41,7 @@ public class ArduinoServiceImpl implements ArduinoService {
 //            return tempInt + "";
         Device temp = this.device;
         this.device = null;
+        System.err.println(temp);
         return temp;
     }
 
