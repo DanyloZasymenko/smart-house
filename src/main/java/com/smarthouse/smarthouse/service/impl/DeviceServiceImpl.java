@@ -28,7 +28,7 @@ public class DeviceServiceImpl implements DeviceService {
     @Override
     public Device save(Device device) {
         checkSave(device);
-        return deviceRepository.save(device.setActive(false));
+        return deviceRepository.save(device);
     }
 
     @Override
