@@ -9,6 +9,10 @@ public interface UserDataService {
 
     UserData save(UserData userData);
 
+    UserData saveForClimateConfig(Long userId, Long deviceId, Long climateConfigId);
+
+    UserData saveForLightConfig(Long userId, Long deviceId, Long lightConfigId);
+
     UserData update(UserData userData);
 
     UserData findOne(Long id);

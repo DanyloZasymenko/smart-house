@@ -2,11 +2,11 @@ package com.smarthouse.smarthouse.service.utils;
 
 public class Temperature {
 
-    private Float humidity;
-    private Float temperatureC;
-    private Float temperatureF;
-    private Float heatIndexC;
-    private Float heatIndexF;
+    private Float humidity = 0.0f;
+    private Float temperatureC = 0.0f;
+    private Float temperatureF = 0.0f;
+    private Float heatIndexC = 0.0f;
+    private Float heatIndexF = 0.0f;
 
     public Temperature() {
     }
