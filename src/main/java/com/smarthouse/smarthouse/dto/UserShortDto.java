@@ -11,6 +11,7 @@ public class UserShortDto<T extends UserShortDto> {
     protected String name;
     protected String middleName;
     protected String lastName;
+    protected Float temperature;
 
     public Long getId() {
         return id;
@@ -25,45 +26,54 @@ public class UserShortDto<T extends UserShortDto> {
         return email;
     }
 
-    public UserShortDto<T> setEmail(String email) {
+    public T setEmail(String email) {
         this.email = email;
-        return this;
+        return (T) this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public UserShortDto<T> setPassword(String password) {
+    public T setPassword(String password) {
         this.password = password;
-        return this;
+        return (T) this;
     }
 
     public String getName() {
         return name;
     }
 
-    public UserShortDto<T> setName(String name) {
+    public T setName(String name) {
         this.name = name;
-        return this;
+        return (T) this;
     }
 
     public String getMiddleName() {
         return middleName;
     }
 
-    public UserShortDto<T> setMiddleName(String middleName) {
+    public T setMiddleName(String middleName) {
         this.middleName = middleName;
-        return this;
+        return (T) this;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public UserShortDto<T> setLastName(String lastName) {
+    public T setLastName(String lastName) {
         this.lastName = lastName;
-        return this;
+        return (T) this;
+    }
+
+    public Float getTemperature() {
+        return temperature;
+    }
+
+    public T setTemperature(Float temperature) {
+        this.temperature = temperature;
+        return (T) this;
     }
 
     @Override
@@ -75,6 +85,7 @@ public class UserShortDto<T extends UserShortDto> {
                 ", name='" + name + '\'' +
                 ", middleName='" + middleName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", temperature=" + temperature +
                 '}';
     }
 }

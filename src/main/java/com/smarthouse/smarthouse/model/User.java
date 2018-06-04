@@ -21,6 +21,7 @@ public class User implements UserDetails {
     private String lastName;
     @ManyToOne(cascade = CascadeType.REFRESH)
     private House house;
+    private Float temperature;
 
     public Long getId() {
         return id;
@@ -86,6 +87,15 @@ public class User implements UserDetails {
         return this;
     }
 
+    public Float getTemperature() {
+        return temperature;
+    }
+
+    public User setTemperature(Float temperature) {
+        this.temperature = temperature;
+        return this;
+    }
+
     @Override
     public String getUsername() {
         return email;
@@ -126,6 +136,7 @@ public class User implements UserDetails {
                 ", middleName='" + middleName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", house=" + (house == null ? "null" : house.getId()) +
+                ", temperature=" + temperature +
                 '}';
     }
 }

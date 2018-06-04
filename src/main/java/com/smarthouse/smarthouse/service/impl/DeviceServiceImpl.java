@@ -92,4 +92,10 @@ public class DeviceServiceImpl implements DeviceService {
         checkObjectExistsById(houseId, houseRepository);
         return deviceRepository.findAllByActiveAndHouse_Id(active, houseId);
     }
+
+    @Override
+    public List<Device> findAllByDeviceTypeAndHouseId(DeviceType deviceType, Long houseId) {
+        checkObjectExistsById(houseId, houseRepository);
+        return deviceRepository.findAllByDeviceTypeAndHouse_Id(deviceType, houseId);
+    }
 }

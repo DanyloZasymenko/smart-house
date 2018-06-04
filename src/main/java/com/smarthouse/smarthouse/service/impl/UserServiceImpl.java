@@ -26,11 +26,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public User save(String name, String middleName, String lastName, String email, String password) {
         return userRepository.save(new User()
-                .setName(name)
-                .setMiddleName(middleName)
-                .setLastName(lastName)
-                .setEmail(email)
-                .setPassword(passwordEncoder.encode(password)));
+                .setName(name.replace(" ", ""))
+                .setMiddleName(middleName.replace(" ", ""))
+                .setLastName(lastName.replace(" ", ""))
+                .setEmail(email.replace(" ", ""))
+                .setPassword(passwordEncoder.encode(password))
+                .setTemperature(0.0f));
     }
 
     @Override
@@ -40,14 +41,22 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User update(Long id, String name, String middleName, String lastName, String email, String password) {
+    public User update(Long id, Float temperature) {
+        checkObjectExistsById(id, userRepository);
+        return userRepository.save(findOne(id)
+                .setTemperature(temperature));
+    }
+
+    @Override
+    public User update(Long id, String name, String middleName, String lastName, String email, String password, Float temperature) {
         checkObjectExistsById(id, userRepository);
         User user = findOne(id)
                 .setName(name)
                 .setMiddleName(middleName)
                 .setLastName(lastName)
                 .setEmail(email)
-                .setPassword(passwordEncoder.encode(password));
+                .setPassword(passwordEncoder.encode(password))
+                .setTemperature(temperature);
         return userRepository.save(user);
     }
 

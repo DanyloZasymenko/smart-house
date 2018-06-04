@@ -6,6 +6,7 @@ import com.smarthouse.smarthouse.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.List;
 
 import static com.smarthouse.smarthouse.service.utils.Validation.*;
@@ -35,18 +36,18 @@ public class UserDataServiceImpl implements UserDataService {
     }
 
     @Override
-    public UserData saveForClimateConfig(Long userId, Long deviceId, Long climateConfigId) {
+    public UserData saveForClimateConfig(Long deviceId, Long climateConfigId, Principal principal) {
         UserData userData = new UserData()
-                .setUser(userService.findOne(userId))
+                .setUser(userService.findByEmail(principal.getName()))
                 .setDevice(deviceService.findOne(deviceId))
                 .setClimateConfig(climateConfigService.findOne(climateConfigId));
         return userDataRepository.save(userData);
     }
 
     @Override
-    public UserData saveForLightConfig(Long userId, Long deviceId, Long lightConfigId) {
+    public UserData saveForLightConfig(Long deviceId, Long lightConfigId, Principal principal) {
         UserData userData = new UserData()
-                .setUser(userService.findOne(userId))
+                .setUser(userService.findByEmail(principal.getName()))
                 .setDevice(deviceService.findOne(deviceId))
                 .setLightConfig(lightConfigService.findOne(lightConfigId));
         return userDataRepository.save(userData);

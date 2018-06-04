@@ -14,12 +14,15 @@ public interface UserService {
 
     User update(User user);
 
+    User update(Long id, Float temperature);
+
     User update(Long id,
                 String name,
                 String middleName,
                 String lastName,
                 String email,
-                String password);
+                String password,
+                Float temperature);
 
     User findOne(Long id);
 

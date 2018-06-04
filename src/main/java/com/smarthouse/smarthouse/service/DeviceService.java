@@ -1,6 +1,7 @@
 package com.smarthouse.smarthouse.service;
 
 import com.smarthouse.smarthouse.model.Device;
+import com.smarthouse.smarthouse.model.enums.DeviceType;
 
 import java.util.List;
 
@@ -30,4 +31,7 @@ public interface DeviceService {
     List<Device> findAllByHouseId(Long houseId);
 
     List<Device> findAllByActiveAndHouseId(Boolean active, Long houseId);
+
+    List<Device> findAllByDeviceTypeAndHouseId(DeviceType deviceType, Long houseId);
+
 }

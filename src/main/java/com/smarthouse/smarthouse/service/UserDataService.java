@@ -3,15 +3,16 @@ package com.smarthouse.smarthouse.service;
 
 import com.smarthouse.smarthouse.model.UserData;
 
+import java.security.Principal;
 import java.util.List;
 
 public interface UserDataService {
 
     UserData save(UserData userData);
 
-    UserData saveForClimateConfig(Long userId, Long deviceId, Long climateConfigId);
+    UserData saveForClimateConfig(Long deviceId, Long climateConfigId, Principal principal);
 
-    UserData saveForLightConfig(Long userId, Long deviceId, Long lightConfigId);
+    UserData saveForLightConfig(Long deviceId, Long lightConfigId, Principal principal);
 
     UserData update(UserData userData);
 

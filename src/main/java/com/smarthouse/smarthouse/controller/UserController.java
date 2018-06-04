@@ -44,8 +44,9 @@ public class UserController {
                                                @RequestParam String middleName,
                                                @RequestParam String lastName,
                                                @RequestParam String email,
-                                               @RequestParam String password) {
-        return ResponseEntity.ok(map(userService.update(id, name, middleName, lastName, email, password), UserFullDto.class));
+                                               @RequestParam String password,
+                                               @RequestParam Float temperature) {
+        return ResponseEntity.ok(map(userService.update(id, name, middleName, lastName, email, password, temperature), UserFullDto.class));
     }
 
     @GetMapping("/find-one/{id}")

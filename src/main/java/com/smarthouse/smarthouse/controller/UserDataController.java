@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 import static com.smarthouse.smarthouse.dto.utils.builder.Builder.map;
@@ -19,18 +20,18 @@ public class UserDataController {
     @Autowired
     private UserDataService userDataService;
 
-    @PostMapping("/save")
-    private ResponseEntity<UserData> saveForClimateConfig(@RequestParam Long userId,
-                                                          @RequestParam Long deviceId,
-                                                          @RequestParam Long climateConfigId) {
-        return ResponseEntity.ok(userDataService.saveForClimateConfig(userId, deviceId, climateConfigId));
+    @PostMapping("/save-for-climate-config")
+    private ResponseEntity<UserData> saveForClimateConfig(@RequestParam Long deviceId,
+                                                          @RequestParam Long climateConfigId,
+                                                          Principal principal) {
+        return ResponseEntity.ok(userDataService.saveForClimateConfig(deviceId, climateConfigId, principal));
     }
 
-    @PostMapping("/save")
-    private ResponseEntity<UserData> saveForLightConfig(@RequestParam Long userId,
-                                                        @RequestParam Long deviceId,
-                                                        @RequestParam Long lightConfigId) {
-        return ResponseEntity.ok(userDataService.saveForLightConfig(userId, deviceId, lightConfigId));
+    @PostMapping("/save-for-light-config")
+    private ResponseEntity<UserData> saveForLightConfig(@RequestParam Long deviceId,
+                                                        @RequestParam Long lightConfigId,
+                                                        Principal principal) {
+        return ResponseEntity.ok(userDataService.saveForLightConfig(deviceId, lightConfigId, principal));
     }
 
     @GetMapping("/find-one/{id}")

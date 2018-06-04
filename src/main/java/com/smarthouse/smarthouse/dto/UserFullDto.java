@@ -26,6 +26,7 @@ public class UserFullDto extends UserShortDto<UserFullDto> {
                 ", name='" + name + '\'' +
                 ", middleName='" + middleName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", temperature=" + temperature +
                 '}';
     }
 }
