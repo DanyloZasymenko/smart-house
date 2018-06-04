@@ -48,14 +48,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User update(Long id, String name, String middleName, String lastName, String email, String password, Float temperature) {
+    public User update(Long id, String name, String middleName, String lastName, String email, Float temperature) {
         checkObjectExistsById(id, userRepository);
         User user = findOne(id)
                 .setName(name)
                 .setMiddleName(middleName)
                 .setLastName(lastName)
                 .setEmail(email)
-                .setPassword(passwordEncoder.encode(password))
                 .setTemperature(temperature);
         return userRepository.save(user);
     }

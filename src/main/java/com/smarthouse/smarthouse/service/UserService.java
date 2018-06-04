@@ -21,7 +21,6 @@ public interface UserService {
                 String middleName,
                 String lastName,
                 String email,
-                String password,
                 Float temperature);
 
     User findOne(Long id);
