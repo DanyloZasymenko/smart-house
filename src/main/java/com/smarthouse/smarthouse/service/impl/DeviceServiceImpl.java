@@ -94,8 +94,8 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
-    public List<Device> findAllByDeviceTypeAndHouseId(DeviceType deviceType, Long houseId) {
+    public List<Device> findAllByDeviceTypeAndHouseId(String deviceTypeName, Long houseId) {
         checkObjectExistsById(houseId, houseRepository);
-        return deviceRepository.findAllByDeviceTypeAndHouse_Id(deviceType, houseId);
+        return deviceRepository.findAllByDeviceTypeAndHouse_Id(DeviceType.valueOf(deviceTypeName), houseId);
     }
 }

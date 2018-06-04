@@ -2,7 +2,6 @@ package com.smarthouse.smarthouse.controller;
 
 import com.smarthouse.smarthouse.dto.DeviceFullDto;
 import com.smarthouse.smarthouse.dto.DeviceShortDto;
-import com.smarthouse.smarthouse.model.enums.DeviceType;
 import com.smarthouse.smarthouse.service.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -71,10 +70,10 @@ public class DeviceController {
                 .map(device -> map(device, DeviceShortDto.class)).collect(toList()));
     }
 
-    @GetMapping("/find-all-by-device-type-and-house-id/{deviceType}/{houseId}")
-    private ResponseEntity<List<DeviceShortDto>> findAllByDeviceTypeAndHouseId(@PathVariable DeviceType deviceType,
+    @GetMapping("/find-all-by-device-type-and-house-id/{deviceTypeName}/{houseId}")
+    private ResponseEntity<List<DeviceShortDto>> findAllByDeviceTypeAndHouseId(@PathVariable String deviceTypeName,
                                                                                @PathVariable Long houseId) {
-        return ResponseEntity.ok(deviceService.findAllByDeviceTypeAndHouseId(deviceType, houseId).stream().map(device ->
+        return ResponseEntity.ok(deviceService.findAllByDeviceTypeAndHouseId(deviceTypeName, houseId).stream().map(device ->
                 map(device, DeviceShortDto.class)).collect(toList()));
     }
 }
