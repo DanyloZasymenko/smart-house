@@ -51,10 +51,10 @@ public class ArduinoServiceImpl implements ArduinoService {
             return false;
     }
 
-    @Scheduled(fixedDelay = 10000)
+    @Scheduled(fixedDelay = 15000)
     private void scheduler() {
         houseService.findAll().stream().filter(house ->
-                house.getDateOnline().toLocalDateTime().isBefore(LocalDateTime.now().minusSeconds(10)) || house.getDateOnline().toLocalDateTime().equals(LocalDateTime.now().minusSeconds(10)))
+                house.getDateOnline().toLocalDateTime().isBefore(LocalDateTime.now().minusSeconds(15)) || house.getDateOnline().toLocalDateTime().equals(LocalDateTime.now().minusSeconds(15)))
                 .forEach(house -> {
                     houseService.update(house.setOnline(false));
                 });
