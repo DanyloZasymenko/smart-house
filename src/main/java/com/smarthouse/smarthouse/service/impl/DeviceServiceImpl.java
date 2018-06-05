@@ -34,7 +34,7 @@ public class DeviceServiceImpl implements DeviceService {
     @Override
     public Device save(String name, Integer pin, String deviceType, Long houseId) {
         return deviceRepository.save(new Device()
-                .setName(name)
+                .setName(replaceLastSpace(name))
                 .setPin(pin)
                 .setDeviceType(DeviceType.valueOf(deviceType))
                 .setHouse(houseService.findOne(houseId))
@@ -45,7 +45,7 @@ public class DeviceServiceImpl implements DeviceService {
     public Device update(Long id, String name, Integer pin, String deviceType, Long houseId) {
         checkObjectExistsById(id, deviceRepository);
         Device device = findOne(id)
-                .setName(name)
+                .setName(replaceLastSpace(name))
                 .setPin(pin)
                 .setDeviceType(DeviceType.valueOf(deviceType))
                 .setHouse(houseService.findOne(houseId));
@@ -97,5 +97,12 @@ public class DeviceServiceImpl implements DeviceService {
     public List<Device> findAllByDeviceTypeAndHouseId(String deviceTypeName, Long houseId) {
         checkObjectExistsById(houseId, houseRepository);
         return deviceRepository.findAllByDeviceTypeAndHouse_Id(DeviceType.valueOf(deviceTypeName), houseId);
+    }
+
+    private String replaceLastSpace(String s) {
+        if (s.endsWith(" "))
+            return s.substring(0, s.length() - 1);
+        else
+            return s;
     }
 }

@@ -26,10 +26,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public User save(String name, String middleName, String lastName, String email, String password) {
         return userRepository.save(new User()
-                .setName(name.replace(" ", ""))
-                .setMiddleName(middleName.replace(" ", ""))
-                .setLastName(lastName.replace(" ", ""))
-                .setEmail(email.replace(" ", ""))
+                .setName(replaceLastSpace(name))
+                .setMiddleName(replaceLastSpace(middleName))
+                .setLastName(replaceLastSpace(lastName))
+                .setEmail(replaceLastSpace(email))
                 .setPassword(passwordEncoder.encode(password))
                 .setTemperature(0.0f));
     }
@@ -51,10 +51,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public User update(Long id, String name, String middleName, String lastName, String email, Float temperature) {
         checkObjectExistsById(id, userRepository);
         User user = findOne(id)
-                .setName(name)
-                .setMiddleName(middleName)
-                .setLastName(lastName)
-                .setEmail(email)
+                .setName(replaceLastSpace(name))
+                .setMiddleName(replaceLastSpace(middleName))
+                .setLastName(replaceLastSpace(lastName))
+                .setEmail(replaceLastSpace(email))
                 .setTemperature(temperature);
         return userRepository.save(user);
     }
@@ -96,5 +96,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         return userRepository.findByEmail(s);
+    }
+
+    private String replaceLastSpace(String s) {
+        if (s.endsWith(" "))
+            return s.substring(0, s.length() - 1);
+        else
+            return s;
     }
 }

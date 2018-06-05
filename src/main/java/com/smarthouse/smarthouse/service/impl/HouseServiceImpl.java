@@ -32,8 +32,8 @@ public class HouseServiceImpl implements HouseService {
     public House save(String name,
                       String serial) {
         return houseRepository.save(new House()
-                .setName(name)
-                .setSerial(serial)
+                .setName(replaceLastSpace(name))
+                .setSerial(replaceLastSpace(serial))
                 .setActive(true));
     }
 
@@ -49,8 +49,8 @@ public class HouseServiceImpl implements HouseService {
                         String serial) {
         checkObjectExistsById(id, houseRepository);
         House house = findOne(id)
-                .setName(name)
-                .setSerial(serial);
+                .setName(replaceLastSpace(name))
+                .setSerial(replaceLastSpace(serial));
         return houseRepository.save(house);
     }
 
@@ -94,5 +94,12 @@ public class HouseServiceImpl implements HouseService {
             userService.update(user.setHouse(house));
             return house;
         }
+    }
+
+    private String replaceLastSpace(String s) {
+        if (s.endsWith(" "))
+            return s.substring(0, s.length() - 1);
+        else
+            return s;
     }
 }
