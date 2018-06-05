@@ -26,6 +26,7 @@ public class AndroidController {
 
     @GetMapping("/get-temperature")
     private ResponseEntity<Temperature> getTemperature() {
+        System.err.println(Temperature.getInstance());
         return ResponseEntity.ok(Temperature.getInstance());
     }
 }

@@ -9,7 +9,6 @@ import com.smarthouse.smarthouse.service.utils.Temperature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import sun.print.resources.serviceui;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -76,12 +75,16 @@ public class ArduinoServiceImpl implements ArduinoService {
 
     @Override
     public void getDataFromSensor(Float humidity, Float temperatureC, Float temperatureF, Float heatIndexC, Float heatIndexF) {
-        Temperature.getInstance()
-                .setHumidity(humidity)
-                .setTemperatureC(temperatureC)
-                .setTemperatureF(temperatureF)
-                .setHeatIndexC(heatIndexC)
-                .setHeatIndexF(heatIndexF);
-        System.err.println(Temperature.getInstance().toString());
+        try {
+            Temperature.getInstance()
+                    .setHumidity(humidity)
+                    .setTemperatureC(temperatureC)
+                    .setTemperatureF(temperatureF)
+                    .setHeatIndexC(heatIndexC)
+                    .setHeatIndexF(heatIndexF);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        System.err.println(Temperature.getInstance().toString());
     }
 }
