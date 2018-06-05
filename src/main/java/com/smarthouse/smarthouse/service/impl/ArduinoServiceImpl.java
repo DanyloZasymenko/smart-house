@@ -27,27 +27,14 @@ public class ArduinoServiceImpl implements ArduinoService {
 
     @Override
     public Device check() {
-//        Integer tempInt = this.pin;
-//        Boolean tempBool = this.status;
-//        if (tempInt != -1) {
-//            this.pin = -1;
-//            this.status = false;
-//            if (tempBool)
-//                return tempInt + "_1";
-//            else
-//                return tempInt + "_0";
-//        } else
-//            return tempInt + "";
         Device temp = this.device;
         this.device = null;
-        System.err.println(temp);
+//        System.err.println(temp);
         return temp;
     }
 
     @Override
     public void changeDevice(Device device) {
-//        this.pin = pin;
-//        this.status = status;
         this.device = device;
     }
 
@@ -64,10 +51,10 @@ public class ArduinoServiceImpl implements ArduinoService {
             return false;
     }
 
-    @Scheduled(fixedDelay = 15000)
+    @Scheduled(fixedDelay = 10000)
     private void scheduler() {
         houseService.findAll().stream().filter(house ->
-                house.getDateOnline().toLocalDateTime().isBefore(LocalDateTime.now().minusSeconds(15)) || house.getDateOnline().toLocalDateTime().equals(LocalDateTime.now().minusSeconds(15)))
+                house.getDateOnline().toLocalDateTime().isBefore(LocalDateTime.now().minusSeconds(10)) || house.getDateOnline().toLocalDateTime().equals(LocalDateTime.now().minusSeconds(10)))
                 .forEach(house -> {
                     houseService.update(house.setOnline(false));
                 });
