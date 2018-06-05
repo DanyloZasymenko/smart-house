@@ -71,6 +71,9 @@ public class ArduinoServiceImpl implements ArduinoService {
                     .setHeatIndexF(heatIndexF);
         } catch (Exception e) {
             e.printStackTrace();
+            System.err.println("-----------------------------------");
+            System.err.println("error reading temperature");
+            System.err.println("-----------------------------------");
         }
 //        System.err.println(Temperature.getInstance().toString());
     }
