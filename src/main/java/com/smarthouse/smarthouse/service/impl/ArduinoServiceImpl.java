@@ -5,6 +5,7 @@ import com.smarthouse.smarthouse.model.House;
 import com.smarthouse.smarthouse.service.ArduinoService;
 import com.smarthouse.smarthouse.service.DeviceService;
 import com.smarthouse.smarthouse.service.HouseService;
+import com.smarthouse.smarthouse.service.utils.AlertButtons;
 import com.smarthouse.smarthouse.service.utils.Temperature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -76,5 +77,19 @@ public class ArduinoServiceImpl implements ArduinoService {
             System.err.println("-----------------------------------");
         }
 //        System.err.println(Temperature.getInstance().toString());
+    }
+
+    @Override
+    public AlertButtons checkAlert() {
+//        System.err.println(AlertButtons.getInstance().toString());
+        return AlertButtons.getInstance();
+    }
+
+    @Override
+    public AlertButtons alert(Boolean fire, Boolean police) {
+        System.err.println("___________________arduino sent alert___________________");
+        return AlertButtons.getInstance()
+                .setFire(fire)
+                .setPolice(police);
     }
 }

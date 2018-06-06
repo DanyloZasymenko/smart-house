@@ -2,6 +2,7 @@ package com.smarthouse.smarthouse.controller;
 
 import com.smarthouse.smarthouse.dto.DeviceFullDto;
 import com.smarthouse.smarthouse.service.AndroidService;
+import com.smarthouse.smarthouse.service.utils.AlertButtons;
 import com.smarthouse.smarthouse.service.utils.Temperature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,5 +29,15 @@ public class AndroidController {
     private ResponseEntity<Temperature> getTemperature() {
         System.err.println(Temperature.getInstance());
         return ResponseEntity.ok(Temperature.getInstance());
+    }
+
+    @GetMapping("/check-alert")
+    private ResponseEntity<AlertButtons> checkAlert() {
+        return ResponseEntity.ok(androidService.checkAlert());
+    }
+
+    @PostMapping("/alert")
+    private ResponseEntity<AlertButtons> alert(@RequestParam Boolean fire, @RequestParam Boolean police) {
+        return ResponseEntity.ok(androidService.alert(fire, police));
     }
 }
