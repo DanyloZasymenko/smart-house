@@ -14,8 +14,8 @@ ESP8266WiFiMulti WiFiMulti;
 
 DHT dht(DHT_PIN, DHT_TYPE);
 const String serial = "serial_228_1488";
-//const String host = "http://mplus.hopto.org:9090/arduino";
-const String host = "http://192.168.1.232:9090/arduino";
+const String host = "http://mplus.hopto.org:9090/arduino";
+//const String host = "http://192.168.1.232:9090/arduino";
 //const String host = "http://192.168.1.7:9090/arduino";
 String scheduleUrl = host + "/confirm-activity/" + serial;
 String checkUrl = host + "/check";
