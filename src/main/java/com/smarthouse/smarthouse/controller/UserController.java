@@ -22,20 +22,27 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    private ResponseEntity<UserFullDto> getUser(Principal principal) {
+    private ResponseEntity<UserShortDto> getUser(Principal principal) {
         System.err.println("-------------------GET-USER--------------------");
-        return ResponseEntity.ok(map(userService.findByEmail(principal.getName()), UserFullDto.class));
+        User user = userService.findByEmail(principal.getName());
+        if(user.getHouse() == null)
+            return ResponseEntity.ok(map(userService.findByEmail(principal.getName()), UserShortDto.class));
+        else
+            return ResponseEntity.ok(map(userService.findByEmail(principal.getName()), UserFullDto.class));
     }
 
     @PostMapping("/save")
-    private ResponseEntity<UserFullDto> save(@RequestParam String name,
+    private ResponseEntity<UserShortDto> save(@RequestParam String name,
                                              @RequestParam String middleName,
                                              @RequestParam String lastName,
                                              @RequestParam String email,
                                              @RequestParam String password) {
         User user = userService.save(name, middleName, lastName, email, password);
         System.err.println(user);
-        return ResponseEntity.ok(map(user, UserFullDto.class));
+        if(user.getHouse() == null)
+            return ResponseEntity.ok(map(user, UserShortDto.class));
+        else
+            return ResponseEntity.ok(map(user, UserFullDto.class));
     }
 
     @PostMapping("/update")
@@ -43,9 +50,8 @@ public class UserController {
                                                @RequestParam String name,
                                                @RequestParam String middleName,
                                                @RequestParam String lastName,
-                                               @RequestParam String email,
-                                               @RequestParam Float temperature) {
-        return ResponseEntity.ok(map(userService.update(id, name, middleName, lastName, email, temperature), UserFullDto.class));
+                                               @RequestParam String email) {
+        return ResponseEntity.ok(map(userService.update(id, name, middleName, lastName, email), UserFullDto.class));
     }
 
     @GetMapping("/find-one/{id}")

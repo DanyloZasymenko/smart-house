@@ -17,6 +17,8 @@ public class House {
     private Boolean active;
     private Boolean online;
     private Timestamp dateOnline;
+    private Float temperature;
+    private Float humidity;
     @OneToMany(mappedBy = "house", cascade = CascadeType.REMOVE)
     private List<Device> devices;
     @OneToMany(mappedBy = "house", cascade = CascadeType.REFRESH)
@@ -94,6 +96,25 @@ public class House {
         return this;
     }
 
+    public Float getTemperature() {
+        return temperature;
+    }
+
+    public House setTemperature(Float temperature) {
+        this.temperature = temperature;
+        return this;
+    }
+
+    public Float getHumidity() {
+        return humidity;
+    }
+
+    public House setHumidity(Float humidity) {
+        this.humidity = humidity;
+        return this;
+    }
+
+
     @Override
     public String toString() {
         return "House{" +
@@ -102,6 +123,9 @@ public class House {
                 ", serial='" + serial + '\'' +
                 ", active=" + active +
                 ", online=" + online +
+                ", dateOnline=" + dateOnline +
+                ", temperature=" + temperature +
+                ", humidity=" + humidity +
                 ", devices=" + devices.stream().map(Device::getId).collect(toList()) +
                 ", users=" + users.stream().map(User::getId).collect(toList()) +
                 '}';

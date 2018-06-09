@@ -10,6 +10,8 @@ public class HouseShortDto<T extends HouseShortDto> {
     protected String serial;
     protected Boolean active;
     protected Boolean online;
+    protected Float temperature;
+    protected Float humidity;
 
     public Long getId() {
         return id;
@@ -56,6 +58,24 @@ public class HouseShortDto<T extends HouseShortDto> {
         return (T) this;
     }
 
+    public Float getTemperature() {
+        return temperature;
+    }
+
+    public T setTemperature(Float temperature) {
+        this.temperature = temperature;
+        return (T) this;
+    }
+
+    public Float getHumidity() {
+        return humidity;
+    }
+
+    public T setHumidity(Float humidity) {
+        this.humidity = humidity;
+        return (T) this;
+    }
+
     @Override
     public String toString() {
         return "HouseShortDto{" +
@@ -64,6 +84,8 @@ public class HouseShortDto<T extends HouseShortDto> {
                 ", serial='" + serial + '\'' +
                 ", active=" + active +
                 ", online=" + online +
+                ", temperature=" + temperature +
+                ", humidity=" + humidity +
                 '}';
     }
 }

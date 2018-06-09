@@ -25,7 +25,9 @@ public class HouseServiceImpl implements HouseService {
     @Override
     public House save(House house) {
         checkSave(house);
-        return houseRepository.save(house);
+        return houseRepository.save(house
+                .setTemperature(0.0f)
+                .setHumidity(0.0f));
     }
 
     @Override
@@ -34,7 +36,9 @@ public class HouseServiceImpl implements HouseService {
         return houseRepository.save(new House()
                 .setName(replaceLastSpace(name))
                 .setSerial(replaceLastSpace(serial))
-                .setActive(true));
+                .setActive(true)
+                .setTemperature(0.0f)
+                .setHumidity(0.0f));
     }
 
     @Override
@@ -46,11 +50,15 @@ public class HouseServiceImpl implements HouseService {
     @Override
     public House update(Long id,
                         String name,
-                        String serial) {
+                        String serial,
+                        Float temperature,
+                        Float humidity) {
         checkObjectExistsById(id, houseRepository);
         House house = findOne(id)
                 .setName(replaceLastSpace(name))
-                .setSerial(replaceLastSpace(serial));
+                .setSerial(replaceLastSpace(serial))
+                .setTemperature(temperature)
+                .setHumidity(humidity);
         return houseRepository.save(house);
     }
 

@@ -16,7 +16,9 @@ public interface HouseService {
 
     House update(Long id,
                  String name,
-                 String serial);
+                 String serial,
+                 Float temperature,
+                 Float humidity);
 
     House findOne(Long id);
 

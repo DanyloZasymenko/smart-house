@@ -33,8 +33,10 @@ public class HouseController {
     @PostMapping("/update")
     private ResponseEntity<HouseFullDto> update(@RequestParam Long id,
                                                 @RequestParam String name,
-                                                @RequestParam String serial) {
-        return ResponseEntity.ok(map(houseService.update(id, name, serial), HouseFullDto.class));
+                                                @RequestParam String serial,
+                                                @RequestParam Float temperature,
+                                                @RequestParam Float humidity) {
+        return ResponseEntity.ok(map(houseService.update(id, name, serial, temperature, humidity), HouseFullDto.class));
     }
 
     @GetMapping("/find-one/{id}")

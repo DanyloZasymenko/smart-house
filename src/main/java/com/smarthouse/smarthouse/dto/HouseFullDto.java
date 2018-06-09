@@ -40,6 +40,8 @@ public class HouseFullDto extends HouseShortDto<HouseFullDto> {
                 ", serial='" + serial + '\'' +
                 ", active=" + active +
                 ", online=" + online +
+                ", temperature=" + temperature +
+                ", humidity=" + humidity +
                 '}';
     }
 }

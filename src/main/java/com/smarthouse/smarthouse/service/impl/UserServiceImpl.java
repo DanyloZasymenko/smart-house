@@ -30,8 +30,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                 .setMiddleName(replaceLastSpace(middleName))
                 .setLastName(replaceLastSpace(lastName))
                 .setEmail(replaceLastSpace(email))
-                .setPassword(passwordEncoder.encode(password))
-                .setTemperature(0.0f));
+                .setPassword(passwordEncoder.encode(password)));
     }
 
     @Override
@@ -41,21 +40,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User update(Long id, Float temperature) {
-        checkObjectExistsById(id, userRepository);
-        return userRepository.save(findOne(id)
-                .setTemperature(temperature));
-    }
-
-    @Override
-    public User update(Long id, String name, String middleName, String lastName, String email, Float temperature) {
+    public User update(Long id, String name, String middleName, String lastName, String email) {
         checkObjectExistsById(id, userRepository);
         User user = findOne(id)
                 .setName(replaceLastSpace(name))
                 .setMiddleName(replaceLastSpace(middleName))
                 .setLastName(replaceLastSpace(lastName))
-                .setEmail(replaceLastSpace(email))
-                .setTemperature(temperature);
+                .setEmail(replaceLastSpace(email));
         return userRepository.save(user);
     }
 

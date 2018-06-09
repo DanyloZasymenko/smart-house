@@ -11,7 +11,6 @@ public class UserShortDto<T extends UserShortDto> {
     protected String name;
     protected String middleName;
     protected String lastName;
-    protected Float temperature;
 
     public Long getId() {
         return id;
@@ -67,15 +66,6 @@ public class UserShortDto<T extends UserShortDto> {
         return (T) this;
     }
 
-    public Float getTemperature() {
-        return temperature;
-    }
-
-    public T setTemperature(Float temperature) {
-        this.temperature = temperature;
-        return (T) this;
-    }
-
     @Override
     public String toString() {
         return "UserShortDto{" +
@@ -85,7 +75,6 @@ public class UserShortDto<T extends UserShortDto> {
                 ", name='" + name + '\'' +
                 ", middleName='" + middleName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", temperature=" + temperature +
                 '}';
     }
 }
