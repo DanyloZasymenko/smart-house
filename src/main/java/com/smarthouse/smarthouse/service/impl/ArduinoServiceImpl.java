@@ -61,6 +61,7 @@ public class ArduinoServiceImpl implements ArduinoService {
         houseService.findAll().stream().filter(house ->
                 house.getDateOnline().toLocalDateTime().isBefore(LocalDateTime.now().minusSeconds(15)) || house.getDateOnline().toLocalDateTime().equals(LocalDateTime.now().minusSeconds(15)))
                 .forEach(house -> {
+                    System.out.println("in scheduler");
                     houseService.update(house.setOnline(false));
                 });
     }
