@@ -13,13 +13,15 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ArduinoServiceImpl implements ArduinoService {
 
     private static Integer pin = -1;
     private static Boolean status = false;
-    private static Device device;
+    private static List<Device> devices = new ArrayList<>();
 
     @Autowired
     private HouseService houseService;
@@ -28,15 +30,17 @@ public class ArduinoServiceImpl implements ArduinoService {
 
     @Override
     public Device check() {
-        Device temp = this.device;
-        this.device = null;
-//        System.err.println(temp);
-        return temp;
+        if (devices.size() != 0) {
+            Device temp = devices.get(0);
+            devices.remove(0);
+            return temp;
+        } else
+            return null;
     }
 
     @Override
     public void changeDevice(Device device) {
-        this.device = device;
+        devices.add(device);
     }
 
     @Override
@@ -57,8 +61,7 @@ public class ArduinoServiceImpl implements ArduinoService {
         houseService.findAll().stream().filter(house ->
                 house.getDateOnline().toLocalDateTime().isBefore(LocalDateTime.now().minusSeconds(15)) || house.getDateOnline().toLocalDateTime().equals(LocalDateTime.now().minusSeconds(15)))
                 .forEach(house -> {
-//                    todo
-//                    houseService.update(house.setOnline(false));
+                    houseService.update(house.setOnline(false));
                 });
     }
 

@@ -65,7 +65,7 @@ void loop() {
     if((WiFiMulti.run() == WL_CONNECTED)) {
       digitalWrite(WIFI_STATUS_OK, HIGH);
       HTTPClient http;
-      if(round(millis() / 1000) % 15 == 0){    
+      if(round(millis() / 1000) % 10 == 0){    
         http.begin(scheduleUrl);
         int httpCode = http.GET();
         if(httpCode > 0) {            
