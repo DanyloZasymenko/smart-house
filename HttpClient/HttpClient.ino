@@ -10,14 +10,15 @@
 #define BUTTON_PIN 0
 #define WIFI_STATUS_OK 16
 #define DHT_TYPE DHT11
+#define FIRE_TEMPERATURE 65.0
 
 ESP8266WiFiMulti WiFiMulti;
 
 DHT dht(DHT_PIN, DHT_TYPE);
 const String serial = "serial_228_1488";
-//const String host = "http://mplus.hopto.org:9090/arduino";
+const String host = "http://mplus.hopto.org:9090/arduino";
 //const String host = "http://192.168.1.232:9090/arduino";
-const String host = "http://192.168.1.7:9090/arduino";
+//const String host = "http://192.168.1.7:9090/arduino";
 String scheduleUrl = host + "/confirm-activity/" + serial;
 String checkUrl = host + "/check";
 bool active = false;
@@ -111,6 +112,13 @@ void loop() {
       digitalWrite(WIFI_STATUS_OK, LOW);
     }
   }
+  if(active){
+    if(round(millis() / 250) % 2 == 0){
+      digitalWrite(WIFI_STATUS_OK, HIGH);
+    } else {
+      digitalWrite(WIFI_STATUS_OK, LOW);
+    }
+  }
   digitalWrite(pin, status);
 }
 
@@ -199,7 +207,7 @@ void alert(){
 }
 
 void checkTemperature(float t){
-  if(t >= 65.0){
+  if(t >= FIRE_TEMPERATURE){
     fire = true;
   } else {
     fire = false; 
